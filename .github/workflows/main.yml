@@ -1,0 +1,28 @@
+# ১. Workflow-এর নাম
+name: My First Automation
+
+# ২. কখন চলবে (Triggers)
+on:
+  push:
+    branches: [ "main" ]    # main ব্রাঞ্চে কোড পুশ করলে চলবে
+  workflow_dispatch:        # GitHub থেকে ম্যানুয়ালি রান করার বাটন দেবে
+
+# ৩. কী কাজ হবে (Jobs)
+jobs:
+  say-hello:
+    runs-on: ubuntu-latest  # ভার্চুয়াল সার্ভার (OS) নির্বাচন
+
+    # ৪. ক্রমানুসারে কাজের তালিকা (Steps)
+    steps:
+      - name: Code Download
+        uses: actions/checkout@v4  # আপনার রিপোজিটরির কোড রানারে নামাবে
+
+      - name: Print Message
+        run: echo "GitHub Action সফলভাবে চলছে!"
+
+      - name: Show System Info
+        run: |
+          echo "বর্তমান সার্ভারের তারিখ ও সময়:"
+          date
+          echo "সার্ভারের কার্নেল ভার্সন:"
+          uname -a
